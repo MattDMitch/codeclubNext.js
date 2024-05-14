@@ -1,5 +1,4 @@
-import { useClient } from 'next/client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Function to generate a random response
 const getRandomResponse = () => {
@@ -18,7 +17,11 @@ const getRandomResponse = () => {
 };
 
 const RandomResponse = () => {
-  const [randomResponse, setRandomResponse] = useClient(() => getRandomResponse());
+  const [randomResponse, setRandomResponse] = useState('');
+
+  useEffect(() => {
+    setRandomResponse(getRandomResponse());
+  }, []);
 
   const handleRefresh = () => {
     setRandomResponse(getRandomResponse());
