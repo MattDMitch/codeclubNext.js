@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // Function to generate a random response
 const getRandomResponse = () => {
@@ -17,10 +17,10 @@ const getRandomResponse = () => {
 };
 
 const RandomResponse = () => {
-  const [randomResponse, setRandomResponse] = useState(getRandomResponse());
+  const randomResponse = getRandomResponse();
 
   const handleRefresh = () => {
-    setRandomResponse(getRandomResponse());
+    window.location.reload();
   };
 
   return (
@@ -36,7 +36,7 @@ const RandomResponse = () => {
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <RandomResponse key={Math.random()} />
+      <RandomResponse />
     </main>
   );
 }
