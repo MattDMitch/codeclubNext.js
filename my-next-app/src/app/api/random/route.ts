@@ -16,5 +16,6 @@ export async function GET(request: NextRequest) {
     // Set cache control headers to prevent caching
     response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
 
-    return NextResponse.from(response);
+    // Return the Response object directly
+    return new NextResponse(response);
 }
