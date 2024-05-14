@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Function to generate a random response
 const getRandomResponse = () => {
@@ -17,7 +17,12 @@ const getRandomResponse = () => {
 };
 
 export default function Home() {
-  const randomResponse = getRandomResponse();
+  const [randomResponse, setRandomResponse] = useState('');
+
+  useEffect(() => {
+    const response = getRandomResponse();
+    setRandomResponse(response);
+  }, []);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
