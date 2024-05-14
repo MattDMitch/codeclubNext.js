@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 // Function to generate a random response
 const getRandomResponse = () => {
@@ -16,19 +16,20 @@ const getRandomResponse = () => {
   return responses[randomIndex];
 };
 
-export default function Home() {
-  const [randomResponse, setRandomResponse] = useState('');
-
-  useEffect(() => {
-    const response = getRandomResponse();
-    setRandomResponse(response);
-  }, []);
+const RandomResponse = () => {
+  const randomResponse = getRandomResponse();
 
   return (
+    <div className="text-center">
+      <h1 className="text-3xl font-bold">{randomResponse}</h1>
+    </div>
+  );
+};
+
+export default function Home() {
+  return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold">{randomResponse}</h1>
-      </div>
+      <RandomResponse />
     </main>
   );
 }
