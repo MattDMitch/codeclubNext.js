@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Function to generate a random response
 const getRandomResponse = () => {
@@ -17,10 +17,10 @@ const getRandomResponse = () => {
 };
 
 const RandomResponse = () => {
-  const randomResponse = getRandomResponse();
+  const [randomResponse, setRandomResponse] = useState(getRandomResponse());
 
   const handleRefresh = () => {
-    window.location.reload();
+    setRandomResponse(getRandomResponse());
   };
 
   return (
