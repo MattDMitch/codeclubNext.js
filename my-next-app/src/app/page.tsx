@@ -1,35 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-// Function to generate a random response
-const getRandomResponse = () => {
-  const responses = [
-    'Hello!',
-    'Hi there!',
-    'Welcome!',
-    'Greetings!',
-    'Hey!',
-    'Hola!',
-    'Bonjour!',
-    'Ciao!',
-  ];
-  const randomIndex = Math.floor(Math.random() * responses.length);
-  return responses[randomIndex];
-};
+const Home = () => {
+  const [randomResponse, setRandomResponse] = useState('');
 
-const RandomResponse = () => {
-  const randomResponse = getRandomResponse();
+  useEffect(() => {
+    // Fetch random response from Cloudflare Worker
+    fetch('https://randoresponse.matthew-4b1.workers.dev/')
+      .then(response => response.text())
+      .then(data => setRandomResponse(data))
+      .catch(error => console.error('Error fetching random response:', error));
+  }, []);
 
-  return (
-    <div className="text-center">
-      <h1 className="text-3xl font-bold">{randomResponse}</h1>
-    </div>
-  );
-};
-
-export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <RandomResponse />
+      <div className="text-center">
+        <h1 className="text-3xl font-bold">{randomResponse}</h1>
+      </div>
     </main>
   );
-}
+};
+
+export default Home;
