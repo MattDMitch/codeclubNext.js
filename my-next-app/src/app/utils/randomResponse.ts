@@ -8,6 +8,6 @@ export function getRandomResponse(): string {
     "Hope you have a great day!",
     "Enjoy your stay!",
   ];
-  const randomIndex = Math.floor(Math.random() * responses.length);
+  let randomIndex = Math.floor(Math.random() * responses.length);
   return responses[randomIndex];
 }
