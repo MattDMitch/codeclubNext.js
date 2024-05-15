@@ -2,7 +2,7 @@
 import { getRandomResponse } from './utils/randomResponse';
 
 const HomePage: React.FC = async () => {
-  const randomResponse = getRandomResponse();
+  let randomResponse = getRandomResponse();
   
   return (
     <div>
