@@ -1,32 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 
-const HomePage = () => {
-  const [randomResponse, setRandomResponse] = useState('');
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://randoresponse.matthew-4b1.workers.dev/');
-        if (response.ok) {
-          const data = await response.text();
-          setRandomResponse(data);
-        } else {
-          console.error('Failed to fetch random response:', response.status);
-        }
-      } catch (error) {
-        console.error('Error fetching random response:', error);
-      }
+class HomePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      randomResponse: '',
     };
+  }
 
-    fetchData();
-  }, []);
+  componentDidMount() {
+    this.fetchData();
+  }
 
-  return (
-    <div>
-      <h1>Random Response:</h1>
-      <p>{randomResponse}</p>
-    </div>
-  );
-};
+  async fetchData() {
+    try {
+      const response = await fetch('https://randoresponse.matthew-4b1.workers.dev/');
+      if (response.ok) {
+        const data = await response.text();
+        this.setState({ randomResponse: data });
+      } else {
+        console.error('Failed to fetch random response:', response.status);
+      }
+    } catch (error) {
+      console.error('Error fetching random response:', error);
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Random Response:</h1>
+        <p>{this.state.randomResponse}</p>
+      </div>
+    );
+  }
+}
 
 export default HomePage;
