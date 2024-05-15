@@ -1,4 +1,3 @@
-import { GetServerSideProps } from 'next';
 import React from 'react';
 
 interface HomePageProps {
@@ -14,7 +13,7 @@ const HomePage: React.FC<HomePageProps> = ({ randomResponse }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<HomePageProps> = async () => {
+export const getStaticProps = async () => {
   let randomResponse = '';
 
   try {
