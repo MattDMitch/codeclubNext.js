@@ -1,23 +1,26 @@
-import React, { useState, useEffect } from 'react';
+// src/app/page.tsx
+import { GetServerSideProps } from 'next';
+import { getRandomResponse } from './utils/randomResponse';
 
-const Home = () => {
-  const [randomResponse, setRandomResponse] = useState('');
+interface HomePageProps {
+  randomResponse: string;
+}
 
-  useEffect(() => {
-    // Fetch random response from Cloudflare Worker
-    fetch('https://randoresponse.matthew-4b1.workers.dev/')
-      .then(response => response.text())
-      .then(data => setRandomResponse(data))
-      .catch(error => console.error('Error fetching random response:', error));
-  }, []);
-
+const HomePage: React.FC<HomePageProps> = ({ randomResponse }) => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold">{randomResponse}</h1>
-      </div>
-    </main>
+    <div>
+      <h1>{randomResponse}</h1>
+    </div>
   );
 };
 
-export default Home;
+export const getServerSideProps: GetServerSideProps = async () => {
+  const randomResponse = getRandomResponse();
+  return {
+    props: {
+      randomResponse,
+    },
+  };
+};
+
+export default HomePage;
